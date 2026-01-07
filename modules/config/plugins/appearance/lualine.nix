@@ -1,85 +1,87 @@
 {
   flake.modules.nixvim.lualine =
-    { config, ... }:
+    { config, lib, ... }:
+    let
+      triangle = "󰕣";
+    in
     {
       plugins = {
         lualine = {
           enable = true;
 
-          lazyLoad.settings.event = [
-            "VimEnter"
-            "BufReadPost"
-            "BufNewFile"
-          ];
-
           settings = {
             options = {
-              theme = rec {
-                normal = {
-                  a = {
-                    fg = config.lib.stylix.colors.withHashtag.base06;
-                    gui = "bold";
+              global_status = true;
+              theme =
+                let
+                  inherit (config.vimiranie.settings.stylix) enable colors;
+                in
+                lib.mkIf enable rec {
+                  normal = {
+                    a = {
+                      fg = colors.withHashtag.base06;
+                      gui = "bold";
+                    };
+                    b = {
+                      fg = colors.withHashtag.base06;
+                    };
+                    c = {
+                      fg = colors.withHashtag.base06;
+                    };
+                    x = {
+                      gui = "bold";
+                    };
+                    z = {
+                      fg = colors.withHashtag.base06;
+                    };
                   };
-                  b = {
-                    fg = config.lib.stylix.colors.withHashtag.base06;
-                  };
-                  c = {
-                    fg = config.lib.stylix.colors.withHashtag.base06;
-                  };
-                  x = {
-                    gui = "bold";
-                  };
-                  z = {
-                    fg = config.lib.stylix.colors.withHashtag.base06;
-                  };
-                };
 
-                insert = {
-                  a = {
-                    fg = config.lib.stylix.colors.withHashtag.base08;
+                  insert = {
+                    a = {
+                      fg = colors.withHashtag.base08;
+                    };
+                    z = {
+                      fg = colors.withHashtag.base06;
+                    };
                   };
-                  z = {
-                    fg = config.lib.stylix.colors.withHashtag.base06;
-                  };
-                };
 
-                visual = {
-                  a = {
-                    fg = config.lib.stylix.colors.withHashtag.base0A;
-                    gui = "bold";
+                  visual = {
+                    a = {
+                      fg = colors.withHashtag.base0A;
+                      gui = "bold";
+                    };
+                    z = {
+                      fg = colors.withHashtag.base06;
+                    };
                   };
-                  z = {
-                    fg = config.lib.stylix.colors.withHashtag.base06;
-                  };
-                };
 
-                replace = {
-                  a = {
-                    fg = config.lib.stylix.colors.withHashtag.base0C;
-                    gui = "bold";
+                  replace = {
+                    a = {
+                      fg = colors.withHashtag.base0C;
+                      gui = "bold";
+                    };
+                    z = {
+                      fg = colors.withHashtag.base06;
+                    };
                   };
-                  z = {
-                    fg = config.lib.stylix.colors.withHashtag.base06;
-                  };
-                };
 
-                command = {
-                  a = {
-                    fg = config.lib.stylix.colors.withHashtag.base0D;
-                    gui = "bold";
+                  command = {
+                    a = {
+                      fg = colors.withHashtag.base0D;
+                      gui = "bold";
+                    };
+                    z = {
+                      fg = colors.withHashtag.base06;
+                    };
                   };
-                  z = {
-                    fg = config.lib.stylix.colors.withHashtag.base06;
-                  };
-                };
 
-                inactive = {
-                  a = {
-                    fg = config.lib.stylix.colors.withHashtag.base04;
-                    bg = config.lib.stylix.colors.withHashtag.base00;
+                  inactive = {
+                    a = {
+                      fg = colors.withHashtag.base04;
+                      bg = colors.withHashtag.base00;
+                    };
                   };
                 };
-              };
               component_separators = " ";
             };
 
@@ -124,10 +126,10 @@
 
                       local reg = vim.fn.reg_recording()
                       if reg == "" then
-                        return triangle .. mode_map[vim.api.nvim_get_mode().mode]
+                        return "${triangle} " .. mode_map[vim.api.nvim_get_mode().mode]
                       end
 
-                      return triangle .. "RECORDING: " .. reg
+                      return "${triangle} " .. "RECORDING: " .. reg
                     end,
                   '';
                 }

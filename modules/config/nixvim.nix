@@ -13,18 +13,24 @@
 
   flake.nixvimModules = {
     default.imports = (lib.attrValues config.flake.modules.nixvim);
-    # default.imports = [ config.flake.modules.nixvim.telescope ];
   };
 
   perSystem =
     { system, ... }:
     {
-      nixvimConfigurations = {
-        default = inputs.nixvim.lib.evalNixvim {
+      # nixvimConfigurations = {
+      #   default = inputs.nixvim.lib.evalNixvim {
+      #     inherit system;
+      #     modules = [
+      #       self.nixvimModules.default
+      #     ];
+      #   };
+      # };
+
+      packages = {
+        default = inputs.nixvim.legacyPackages.${system}.makeNixvimWithModule {
           inherit system;
-          modules = [
-            self.nixvimModules.default
-          ];
+          module = self.nixvimModules.default;
         };
       };
     };
