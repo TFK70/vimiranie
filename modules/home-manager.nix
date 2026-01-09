@@ -16,23 +16,6 @@
           types
           mkIf
           ;
-        nixvim-package = self.packages.${system}.default;
-        nixvim-with-target = nixvim-package.extend config.stylix.targets.nixvim.exportedModule;
-        nixvim-extended = nixvim-with-target.extend {
-          vimiranie =
-            let
-              inherit (config.programs.vimiranie.settings) stylix;
-            in
-            {
-              inherit (config.programs.vimiranie) enable;
-              settings = {
-                stylix = {
-                  enable = stylix.enable;
-                  colors = config.lib.stylix.colors;
-                };
-              };
-            };
-        };
       in
       {
         options.programs.vimiranie = {
@@ -41,29 +24,46 @@
             stylix = {
               enable = mkEnableOption "stylix colors";
             };
-          };
-        };
-
-        config.home.packages = mkIf config.programs.vimiranie.enable [ nixvim-extended ];
-      };
-  };
-
-  flake.modules.nixvim.options =
-    { lib, ... }:
-    let
-      inherit (lib) mkEnableOption mkOption types;
-    in
-    {
-      options.vimiranie = {
-        enable = mkEnableOption "vimiranie";
-        settings = {
-          stylix = {
-            enable = mkEnableOption "stylix colors";
-            colors = mkOption {
-              type = types.attrs;
+            colorscheme = {
+              enable = mkEnableOption "colorscheme package";
+              name = mkOption {
+                type = types.enum [ "catppuccin" ];
+              };
+            };
+            obsidian = {
+              enable = mkEnableOption "obsidian";
+              vaultFolder = mkOption {
+                type = types.str;
+                default = "";
+              };
             };
           };
         };
+
+        config.home.packages =
+          let
+            inherit (config.programs.vimiranie) settings;
+            nixvim-package = self.packages.${system}.default;
+            nixvim-with-target =
+              if settings.stylix.enable then
+                nixvim-package.extend config.stylix.targets.nixvim.exportedModule
+              else
+                nixvim-package;
+            nixvim-extended = nixvim-with-target.extend {
+              vimiranie = {
+                inherit (config.programs.vimiranie) enable;
+                settings = {
+                  stylix = {
+                    enable = settings.stylix.enable;
+                    colors = config.lib.stylix.colors;
+                  };
+                  colorscheme = settings.colorscheme;
+                  obsidian = settings.obsidian;
+                };
+              };
+            };
+          in
+          mkIf config.programs.vimiranie.enable [ nixvim-extended ];
       };
-    };
+  };
 }

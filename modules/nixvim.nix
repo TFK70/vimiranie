@@ -18,15 +18,6 @@
   perSystem =
     { system, ... }:
     {
-      # nixvimConfigurations = {
-      #   default = inputs.nixvim.lib.evalNixvim {
-      #     inherit system;
-      #     modules = [
-      #       self.nixvimModules.default
-      #     ];
-      #   };
-      # };
-
       packages = {
         default = inputs.nixvim.legacyPackages.${system}.makeNixvimWithModule {
           inherit system;

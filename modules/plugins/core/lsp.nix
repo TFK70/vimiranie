@@ -133,6 +133,33 @@
           desc = "Lsp buf type_definition";
         };
       }
+      {
+        key = "<leader>lr";
+        mode = "n";
+        action = inputs.nixvim.lib.nixvim.mkRaw "vim.lsp.buf.rename";
+        options = {
+          silent = true;
+          desc = "Lsp rename";
+        };
+      }
+      {
+        key = "K";
+        mode = "n";
+        action = inputs.nixvim.lib.nixvim.mkRaw "vim.lsp.buf.hover";
+        options = {
+          silent = true;
+          desc = "Lsp hover";
+        };
+      }
+      {
+        key = "<C-h>";
+        mode = "n";
+        action = inputs.nixvim.lib.nixvim.mkRaw "vim.lsp.buf.signature_help";
+        options = {
+          silent = true;
+          desc = "Signarure help";
+        };
+      }
     ];
 
     plugins = {
@@ -141,62 +168,6 @@
       lsp-signature.enable = true;
       schemastore.enable = true;
       helm.enable = true;
-
-      which-key.settings.spec = [
-        {
-          __unkeyed-1 = "<leader>l";
-          group = "LSP";
-          icon = " ";
-          mode = [
-            "n"
-            "v"
-          ];
-        }
-        {
-          __unkeyed-1 = "<leader>l[";
-          desc = "Prev";
-        }
-        {
-          __unkeyed-1 = "<leader>l]";
-          desc = "Next";
-        }
-        {
-          __unkeyed-1 = "<leader>la";
-          desc = "Code Action";
-        }
-        {
-          __unkeyed-1 = "<leader>ld";
-          desc = "Definition";
-        }
-        {
-          __unkeyed-1 = "<leader>lD";
-          desc = "References";
-        }
-        {
-          __unkeyed-1 = "<leader>lf";
-          desc = "Format";
-        }
-        {
-          __unkeyed-1 = "<leader>lh";
-          desc = "Lsp Hover";
-        }
-        {
-          __unkeyed-1 = "<leader>lH";
-          desc = "Diagnostic Hover";
-        }
-        {
-          __unkeyed-1 = "<leader>li";
-          desc = "Implementation";
-        }
-        {
-          __unkeyed-1 = "<leader>lr";
-          desc = "Rename";
-        }
-        {
-          __unkeyed-1 = "<leader>lt";
-          desc = "Type Definition";
-        }
-      ];
     };
   };
 }

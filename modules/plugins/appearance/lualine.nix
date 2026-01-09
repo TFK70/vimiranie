@@ -136,7 +136,7 @@
               ];
 
               lualine_b = [ "branch" ];
-              lualine_c = [ ];
+              lualine_c = [ "" ];
               lualine_x = [
                 {
                   __raw = ''

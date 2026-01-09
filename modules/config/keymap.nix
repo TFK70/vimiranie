@@ -51,13 +51,6 @@
         mode = "n";
       }
 
-      # Search under the cursor
-      {
-        action = ":%s/\\<<C-r><C-w>\\/<C-r><C-w>/gI<Left><Left><Left>";
-        key = "<leader>ss";
-        mode = "v";
-      }
-
       # Replace under the cursor
       {
         action = "y:%s/<C-r>\"//g<Left><Left>";
@@ -166,19 +159,6 @@
       {
         action = "<cmd>CellularAutomaton make_it_rain<CR>";
         key = "<leader><leader><leader>";
-        mode = "n";
-      }
-
-      # Reload colorscheme
-      {
-        action = ''
-          function()
-            require("plenary.reload").reload_module("config.colorscheme", true)
-            require("config.colorscheme")
-            print("Colorscheme reloaded")
-          end
-        '';
-        key = "<leader>r";
         mode = "n";
       }
     ];
