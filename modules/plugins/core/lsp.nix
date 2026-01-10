@@ -153,7 +153,7 @@
       }
       {
         key = "<C-h>";
-        mode = "n";
+        mode = "i";
         action = inputs.nixvim.lib.nixvim.mkRaw "vim.lsp.buf.signature_help";
         options = {
           silent = true;
