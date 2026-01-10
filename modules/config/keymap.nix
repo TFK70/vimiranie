@@ -1,3 +1,4 @@
+{ inputs, ... }:
 {
   flake.modules.nixvim.keymap = {
     globals = {
@@ -130,7 +131,7 @@
 
       # Null buffer
       {
-        action = "_dP";
+        action = inputs.nixvim.lib.nixvim.mkRaw "[[\"_dP]]";
         key = "<leader>p";
         mode = "x";
       }

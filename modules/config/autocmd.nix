@@ -1,7 +1,23 @@
 { inputs, ... }:
 {
   flake.modules.nixvim.autocmd = {
+    autoGroups = {
+      highlight-yank = {
+        clear = true;
+      };
+    };
+
     autoCmd = [
+      {
+        event = [ "TextYankPost" ];
+        desc = "Highlight when yanking (copying) text";
+        group = "highlight-yank";
+        callback = inputs.nixvim.lib.nixvim.mkRaw ''
+          function()
+            vim.highlight.on_yank()
+          end
+        '';
+      }
       {
         event = [ "FileType" ];
         pattern = [
