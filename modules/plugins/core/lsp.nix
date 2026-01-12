@@ -166,6 +166,7 @@
       lsp-format.enable = true;
       lsp-signature.enable = true;
       schemastore.enable = true;
+      helm.enable = true;
     };
   };
 }
