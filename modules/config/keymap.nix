@@ -67,7 +67,7 @@
 
       # Open diagnostic quickfix list
       {
-        action = "vim.diagnostic.setloclist";
+        action = "<cmd>lua vim.diagnostic.setloclist()<cr>";
         key = "<leader>q";
         mode = "n";
         options = { desc = "Open diagnostic [Q]uickfix list"; };

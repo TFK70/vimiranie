@@ -40,7 +40,6 @@
         lua_ls.enable = true;
         gopls.enable = true;
         html.enable = true;
-        helm_ls.enable = true;
         java_language_server.enable = true;
         jsonls.enable = true;
         marksman.enable = true;
@@ -167,7 +166,6 @@
       lsp-format.enable = true;
       lsp-signature.enable = true;
       schemastore.enable = true;
-      helm.enable = true;
     };
   };
 }
