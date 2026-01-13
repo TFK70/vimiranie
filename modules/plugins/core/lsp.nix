@@ -38,7 +38,18 @@
         cssls.enable = true;
         dockerls.enable = true;
         lua_ls.enable = true;
-        gopls.enable = true;
+        gopls = {
+          enable = true;
+          config.hints = {
+            assignVariableTypes = true;
+            compositeLiteralFields = true;
+            compositeLiteralTypes = true;
+            constantValues = true;
+            functionTypeParameters = true;
+            parameterNames = true;
+            rangeVariableTypes = true;
+          };
+        };
         html.enable = true;
         java_language_server.enable = true;
         jsonls.enable = true;
@@ -57,6 +68,19 @@
     };
 
     keymapsOnEvents.LspAttach = [
+      {
+        key = "<leader>gd";
+        mode = "n";
+        action = inputs.nixvim.lib.nixvim.mkRaw ''
+          function() 
+            vim.lsp.buf.definition() 
+          end
+        '';
+        options = {
+          silent = true;
+          desc = "Lsp diagnostic open_float";
+        };
+      }
       {
         action.__raw = ''vim.lsp.buf.format'';
         mode = "v";
