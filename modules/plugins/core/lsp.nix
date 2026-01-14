@@ -1,6 +1,7 @@
 { inputs, ... }:
 {
   flake.modules.nixvim.lsp = {
+    diagnostic.settings.virtual_text = true;
     lsp = {
       inlayHints.enable = true;
 
@@ -40,14 +41,17 @@
         lua_ls.enable = true;
         gopls = {
           enable = true;
-          config.hints = {
-            assignVariableTypes = true;
-            compositeLiteralFields = true;
-            compositeLiteralTypes = true;
-            constantValues = true;
-            functionTypeParameters = true;
-            parameterNames = true;
-            rangeVariableTypes = true;
+          config.settings = {
+            hints = {
+              assignVariableTypes = true;
+              compositeLiteralFields = true;
+              compositeLiteralTypes = true;
+              constantValues = true;
+              functionTypeParameters = true;
+              parameterNames = true;
+              rangeVariableTypes = true;
+            };
+            gopls.buildFlags = [ "-tags=integration" ];
           };
         };
         html.enable = true;
