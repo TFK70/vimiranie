@@ -61,7 +61,16 @@
         pyright.enable = true;
         pylsp.enable = true;
         basedpyright.enable = true;
-        qmlls.enable = true;
+        qmlls = {
+          enable = true;
+          config.settings = {
+            qmlls = {
+              builtinTypesDocumentUri = "";
+              projectSpecificFiles = [ "shell.qml" ];
+            };
+            single_file_support = true;
+          };
+        };
         sqls.enable = true;
         ts_ls.enable = true;
         tsgo.enable = true;

@@ -11,7 +11,7 @@
     keymaps = [
       {
         action = ":lua require('bufdelete').bufdelete(0, false)<cr>";
-        key = "<leader>p";
+        key = "<leader>Q";
         mode = "x";
         options = {
           noremap = true;

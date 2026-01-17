@@ -131,7 +131,7 @@
 
       # Null buffer
       {
-        action = inputs.nixvim.lib.nixvim.mkRaw "[[\"_dP]]";
+        action = "\"_dP";
         key = "<leader>p";
         mode = "x";
       }
