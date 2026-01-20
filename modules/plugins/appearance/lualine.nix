@@ -11,7 +11,7 @@
 
           settings = {
             options = {
-              global_status = true;
+              globalstatus = true;
               theme =
                 let
                   inherit (config.vimiranie.settings.stylix) enable colors;
