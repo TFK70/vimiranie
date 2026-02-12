@@ -1,6 +1,7 @@
 { inputs, ... }:
 {
   flake.modules.nixvim.lsp = {
+
     diagnostic.settings.virtual_text = true;
     lsp = {
       inlayHints.enable = true;
@@ -76,6 +77,14 @@
         tsgo.enable = true;
         yamlls.enable = true;
         zls.enable = true;
+        ltex = {
+          enable = true;
+          config.settings = {
+            ltex = {
+              checkFrequency = "save";
+            };
+          };
+        };
       };
 
     };

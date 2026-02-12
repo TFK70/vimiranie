@@ -11,6 +11,7 @@
           };
           ignore_filetypes = {
             markdown = true;
+            tex = true;
           };
         };
       };
