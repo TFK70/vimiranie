@@ -28,6 +28,7 @@
               "latex"
               "bibtex"
               "comment"
+              "jinja"
             ];
             auto_install = true;
             highlight = {
