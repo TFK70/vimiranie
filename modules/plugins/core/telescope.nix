@@ -4,6 +4,7 @@
       telescope = {
         enable = true;
         autoLoad = true;
+        lazyLoad.enable = false;
         keymaps = {
           "<leader>f" = "find_files";
           "<leader>st" = "live_grep";

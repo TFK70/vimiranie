@@ -16,10 +16,34 @@
           types
           mkIf
           ;
+        inherit (config.programs.vimiranie) settings;
+
+        nixvim-package = self.packages.${system}.default;
+        nixvim-with-target =
+          if settings.stylix.enable then
+            nixvim-package.extend config.stylix.targets.nixvim.exportedModule
+          else
+            nixvim-package;
+        nixvim-extended = nixvim-with-target.extend {
+          vimiranie = {
+            inherit (config.programs.vimiranie) enable;
+            settings = {
+              stylix = {
+                enable = settings.stylix.enable;
+                colors = config.lib.stylix.colors;
+              };
+              colorscheme = settings.colorscheme;
+              obsidian = settings.obsidian;
+            };
+          };
+        };
       in
       {
         options.programs.vimiranie = {
           enable = mkEnableOption "vimiranie";
+          package = mkOption {
+            type = types.package;
+          };
           settings = {
             stylix = {
               enable = mkEnableOption "stylix colors";
@@ -40,30 +64,8 @@
           };
         };
 
-        config.home.packages =
-          let
-            inherit (config.programs.vimiranie) settings;
-            nixvim-package = self.packages.${system}.default;
-            nixvim-with-target =
-              if settings.stylix.enable then
-                nixvim-package.extend config.stylix.targets.nixvim.exportedModule
-              else
-                nixvim-package;
-            nixvim-extended = nixvim-with-target.extend {
-              vimiranie = {
-                inherit (config.programs.vimiranie) enable;
-                settings = {
-                  stylix = {
-                    enable = settings.stylix.enable;
-                    colors = config.lib.stylix.colors;
-                  };
-                  colorscheme = settings.colorscheme;
-                  obsidian = settings.obsidian;
-                };
-              };
-            };
-          in
-          mkIf config.programs.vimiranie.enable [ nixvim-extended ];
+        config.home.packages = mkIf config.programs.vimiranie.enable [ nixvim-extended ];
+        config.programs.vimiranie.package = nixvim-extended;
       };
   };
 }
