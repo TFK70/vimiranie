@@ -51,7 +51,7 @@
             colorscheme = {
               enable = mkEnableOption "colorscheme package";
               name = mkOption {
-                type = types.enum [ "catppuccin" ];
+                type = types.str;
               };
             };
             obsidian = {

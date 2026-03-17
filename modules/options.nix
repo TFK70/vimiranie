@@ -21,7 +21,7 @@
               default = true;
             };
             name = mkOption {
-              type = types.enum [ "catppuccin" ];
+              type = types.str;
               default = "catppuccin";
             };
           };

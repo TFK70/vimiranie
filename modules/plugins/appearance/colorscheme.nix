@@ -13,8 +13,8 @@
       ];
 
       colorschemes = lib.mkIf settings.colorscheme.enable {
-        catppuccin = {
-          enable = lib.mkIf (settings.colorscheme.name == "catppuccin") true;
+        ${settings.colorscheme.name} = {
+          enable = true;
         };
       };
     };
