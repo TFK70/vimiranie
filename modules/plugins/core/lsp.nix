@@ -91,19 +91,6 @@
 
     keymapsOnEvents.LspAttach = [
       {
-        key = "<leader>gd";
-        mode = "n";
-        action = inputs.nixvim.lib.nixvim.mkRaw ''
-          function() 
-            vim.lsp.buf.definition() 
-          end
-        '';
-        options = {
-          silent = true;
-          desc = "Lsp diagnostic open_float";
-        };
-      }
-      {
         action.__raw = ''vim.lsp.buf.format'';
         mode = "v";
         key = "<leader>lf";
@@ -113,6 +100,7 @@
           desc = "Format selection";
         };
       }
+      # TODO: не работает
       {
         key = "<leader>lH";
         mode = "n";

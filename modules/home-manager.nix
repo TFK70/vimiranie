@@ -61,6 +61,9 @@
                 default = "";
               };
             };
+            supermaven = {
+              enable = mkEnableOption "supermaven";
+            };
           };
         };
 

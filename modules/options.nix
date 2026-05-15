@@ -14,6 +14,9 @@
               type = types.attrs;
             };
           };
+          supermaven = {
+            enable = mkEnableOption "supermaven";
+          };
           colorscheme = {
             enable = mkOption {
               type = types.bool;
