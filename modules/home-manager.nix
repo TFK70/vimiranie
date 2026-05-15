@@ -27,6 +27,7 @@
         nixvim-extended = nixvim-with-target.extend {
           vimiranie = {
             inherit (config.programs.vimiranie) enable;
+            # TODO: автоматизировать прокидывание настроек
             settings = {
               stylix = {
                 enable = settings.stylix.enable;
@@ -34,6 +35,7 @@
               };
               colorscheme = settings.colorscheme;
               obsidian = settings.obsidian;
+              supermaven = settings.supermaven;
             };
           };
         };
