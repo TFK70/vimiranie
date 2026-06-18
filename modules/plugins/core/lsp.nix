@@ -198,7 +198,7 @@
       ];
 
       plugins = {
-        lsp.enable = false;
+        lsp.enable = true;
         lsp-format.enable = true;
         lsp-signature.enable = true;
         schemastore.enable = true;
