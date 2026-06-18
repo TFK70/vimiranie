@@ -8,6 +8,9 @@
       options.vimiranie = {
         enable = mkEnableOption "vimiranie";
         settings = {
+          lsp = {
+            enable = mkEnableOption "LSP";
+          };
           stylix = {
             enable = mkEnableOption "stylix colors";
             colors = mkOption {

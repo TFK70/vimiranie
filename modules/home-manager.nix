@@ -50,6 +50,9 @@
             stylix = {
               enable = mkEnableOption "stylix colors";
             };
+            lsp = {
+              enable = mkEnableOption "LSP";
+            };
             colorscheme = {
               enable = mkEnableOption "colorscheme package";
               name = mkOption {
