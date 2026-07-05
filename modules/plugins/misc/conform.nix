@@ -10,7 +10,7 @@
             notify_on_error = true;
 
             formatters_by_ft = {
-              nix = [ "nixfmt-rfc-style" ];
+              nix = [ "nixfmt" ];
               lua = [ "stylua" ];
               yaml = [ "yamlfmt" ];
               "_" = [
@@ -21,8 +21,8 @@
             };
 
             formatters = {
-              nixfmt-rfc-style = {
-                command = lib.getExe pkgs.nixfmt-rfc-style;
+              nixfmt = {
+                command = lib.getExe pkgs.nixfmt;
               };
               stylua = {
                 command = lib.getExe pkgs.stylua;

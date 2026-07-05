@@ -1,8 +1,14 @@
 {
-  flake.modules.nixvim.transparent = {
+  flake.modules.nixvim.transparent = { pkgs, ... }: {
     plugins = {
       transparent = {
         enable = true;
+        package = pkgs.vimPlugins.transparent-nvim.overrideAttrs (old: {
+          meta = old.meta // {
+            # какого-то хуя она unfree стала
+            license = pkgs.lib.licenses.mit;
+          };
+        });
         settings = {
           exclude_groups = [
             "CursorLine"

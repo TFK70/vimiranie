@@ -72,8 +72,8 @@
           };
         };
 
-        config.home.packages = mkIf config.programs.vimiranie.enable [ nixvim-extended ];
         config.programs.vimiranie.package = nixvim-extended;
+        config.home.packages = mkIf config.programs.vimiranie.enable [ config.programs.vimiranie.package ];
       };
   };
 }
