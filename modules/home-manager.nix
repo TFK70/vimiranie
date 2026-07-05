@@ -29,6 +29,9 @@
             inherit (config.programs.vimiranie) enable;
             # TODO: автоматизировать прокидывание настроек
             settings = {
+              lsp = {
+                enable = settings.lsp.enable;
+              };
               stylix = {
                 enable = settings.stylix.enable;
                 colors = config.lib.stylix.colors;
