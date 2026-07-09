@@ -21,13 +21,30 @@
         };
         settings = {
           defaults = {
-            file_ignore_patterns = [
+            file_ignore_patterns = 
+              let
+                ignore_extensions = [
+                  # Images
+                  "png"
+                  "jpg"
+                  "jpeg"
+
+                  # Docs
+                  "pdf"
+                  "docx"
+
+                  # Executables
+                  "exe"
+                ];
+              in
+              [
               "^.git/"
               "^.cache/"
               "^_build/"
+              "^dist/"
               "^node_modules/"
               "^.elixir_ls"
-            ];
+            ] ++ map (ext: ".*\.${ext}$") ignore_extensions;
             prompt_prefix = " ";
             color_devicons = true;
             layout_strategy = "vertical";
