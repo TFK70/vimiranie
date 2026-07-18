@@ -1,5 +1,5 @@
 {
-  flake.modules.nixvim.telescope = {
+  flake.modules.not-nixvim.telescope = {
     plugins = {
       telescope = {
         enable = true;
@@ -10,7 +10,6 @@
           "<leader>st" = "live_grep";
           "<leader>sb" = "buffers";
           "<leader>sl" = "lsp_document_symbols";
-          "<leader>t" = "telescope_sessions";
         };
         extensions = {
           ui-select.enable = true;
