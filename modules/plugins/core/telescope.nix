@@ -2,12 +2,26 @@
   flake.modules.nixvim.telescope = { lib, ... }: {
     keymaps = [
       {
+        key = "<leader>F";
+        mode = "n";
+        action = lib.nixvim.mkRaw ''
+          function()
+            require('telescope.builtin').find_files({
+              cwd = require("telescope.utils").buffer_dir()
+            })
+          end
+        '';
+        options = {
+          desc = "Telescope find_files current dir";
+        };
+      }
+      {
         key = "<leader>sT";
         mode = "n";
         action = lib.nixvim.mkRaw ''
           function()
             require('telescope.builtin').live_grep({
-              search_dirs = { vim.fn.expand("%:h") }
+              search_dirs = { require("telescope.utils").buffer_dir() }
             })
           end
         '';
