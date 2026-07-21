@@ -1,5 +1,21 @@
 {
-  flake.modules.nixvim.telescope = {
+  flake.modules.nixvim.telescope = { lib, ... }: {
+    keymaps = [
+      {
+        key = "<leader>sT";
+        mode = "n";
+        action = lib.nixvim.mkRaw ''
+          function()
+            require('telescope.builtin').live_grep({
+              search_dirs = { vim.fn.expand("%:h") }
+            })
+          end
+        '';
+        options = {
+          desc = "Telescope live_grep current dir";
+        };
+      }
+    ];
     plugins = {
       telescope = {
         enable = true;
