@@ -75,7 +75,6 @@
           };
           sqls.enable = true;
           ts_ls.enable = true;
-          tsgo.enable = true;
           yamlls.enable = true;
           zls.enable = true;
           rust_analyzer.enable = true;
