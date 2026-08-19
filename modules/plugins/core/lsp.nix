@@ -74,7 +74,13 @@
             };
           };
           sqls.enable = true;
-          ts_ls.enable = true;
+          ts_ls = {
+            enable = true;
+            config.capabilities.textDocument = {
+              formatting = null;
+              rangeFormatting = null;
+            };
+          };
           yamlls.enable = true;
           zls.enable = true;
           rust_analyzer.enable = true;
@@ -198,7 +204,7 @@
 
       plugins = {
         lsp.enable = true;
-        lsp-format.enable = true;
+        lsp-format.enable = false;
         lsp-signature.enable = true;
         schemastore.enable = true;
         helm.enable = true;
