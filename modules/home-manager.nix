@@ -27,10 +27,27 @@
         nixvim-extended = nixvim-with-target.extend {
           vimiranie = {
             inherit (config.programs.vimiranie) enable;
-            # TODO: автоматизировать прокидывание настроек
             settings = {
               lsp = {
-                enable = settings.lsp.enable;
+                enable = false;
+              };
+              stylix = {
+                enable = settings.stylix.enable;
+                colors = config.lib.stylix.colors;
+              };
+              colorscheme = settings.colorscheme;
+              obsidian = settings.obsidian;
+              supermaven = settings.supermaven;
+            };
+          };
+        };
+
+        nixvim-extended-with-lsps = nixvim-with-target.extend {
+          vimiranie = {
+            inherit (config.programs.vimiranie) enable;
+            settings = {
+              lsp = {
+                enable = true;
               };
               stylix = {
                 enable = settings.stylix.enable;
@@ -49,12 +66,12 @@
           package = mkOption {
             type = types.package;
           };
+          packageWithLsps = mkOption {
+            type = types.package;
+          };
           settings = {
             stylix = {
               enable = mkEnableOption "stylix colors";
-            };
-            lsp = {
-              enable = mkEnableOption "LSP";
             };
             colorscheme = {
               enable = mkEnableOption "colorscheme package";
@@ -76,6 +93,7 @@
         };
 
         config.programs.vimiranie.package = nixvim-extended;
+        config.programs.vimiranie.packageWithLsps = nixvim-extended-with-lsps;
         config.home.packages = mkIf config.programs.vimiranie.enable [ config.programs.vimiranie.package ];
       };
   };

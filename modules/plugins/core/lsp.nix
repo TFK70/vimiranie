@@ -38,7 +38,6 @@
             ];
           };
           cmake.enable = true;
-          cssls.enable = true;
           dockerls.enable = true;
           lua_ls.enable = true;
           gopls = {
@@ -57,23 +56,7 @@
             };
           };
           html.enable = true;
-          java_language_server.enable = true;
           jsonls.enable = true;
-          marksman.enable = true;
-          pyright.enable = true;
-          pylsp.enable = true;
-          basedpyright.enable = true;
-          qmlls = {
-            enable = true;
-            config.settings = {
-              qmlls = {
-                builtinTypesDocumentUri = "";
-                projectSpecificFiles = [ "shell.qml" ];
-              };
-              single_file_support = true;
-            };
-          };
-          sqls.enable = true;
           ts_ls = {
             enable = true;
             config.capabilities.textDocument = {
@@ -82,18 +65,7 @@
             };
           };
           yamlls.enable = true;
-          zls.enable = true;
-          rust_analyzer.enable = true;
-          ltex = {
-            enable = true;
-            config.settings = {
-              ltex = {
-                checkFrequency = "save";
-              };
-            };
-          };
         };
-
       };
 
       keymapsOnEvents.LspAttach = [
