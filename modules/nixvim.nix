@@ -17,12 +17,16 @@
 
   perSystem =
     { system, ... }:
+    let
+      nixvim = inputs.nixvim.legacyPackages.${system}.makeNixvimWithModule {
+        inherit system;
+        module = self.nixvimModules.default;
+      };
+    in
     {
       packages = {
-        default = inputs.nixvim.legacyPackages.${system}.makeNixvimWithModule {
-          inherit system;
-          module = self.nixvimModules.default;
-        };
+        default = nixvim;
+        lsp = nixvim.extend { vimiranie.settings.lsp.enable = true; };
       };
     };
 }
