@@ -18,7 +18,7 @@
           ;
         inherit (config.programs.vimiranie) settings;
 
-        nixvim-package = self.packages.${system}.default;
+        nixvim-package = self.packages.${system}.default.nixvim;
         nixvim-with-target =
           if settings.stylix.enable then
             nixvim-package.extend config.stylix.targets.nixvim.exportedModule
@@ -59,6 +59,16 @@
             };
           };
         };
+        namedPackage =
+          name: drv:
+          pkgs.runCommand name
+            {
+              meta.mainProgram = name;
+            }
+            ''
+              mkdir -p $out/bin
+              ln -s ${drv}/bin/nvim $out/bin/${name}
+            '';
       in
       {
         options.programs.vimiranie = {
@@ -94,7 +104,12 @@
 
         config.programs.vimiranie.package = nixvim-extended;
         config.programs.vimiranie.packageWithLsps = nixvim-extended-with-lsps;
-        config.home.packages = mkIf config.programs.vimiranie.enable [ config.programs.vimiranie.package ];
+        config.home.packages =
+          mkIf config.programs.vimiranie.enable
+          [
+            (namedPackage "vimiranie" nixvim-extended)
+            (namedPackage "vimiranie-lsp" nixvim-extended-with-lsps)
+          ];
       };
   };
 }

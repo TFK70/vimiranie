@@ -7,8 +7,8 @@ Global Neovim configuration built as a [nixvim](https://github.com/nix-community
 - `flake.nix` — minimal entry point; outputs are assembled by `flake-parts` + `import-tree` from `modules/`.
 - `modules/flake/` — flake-level wiring: `imports.nix` (flake-parts + nixvim flakeModules), `systems.nix` (systems from `nix-systems`).
 - `modules/nixvim.nix` — defines `flake.nixvimModules.default` (collects `config.flake.modules.nixvim`) and perSystem packages:
-  - `packages.default` — base nixvim (`makeNixvimWithModule`).
-  - `packages.lsp` — same nixvim extended with `vimiranie.settings.lsp.enable = true`.
+  - `packages.default` — base nixvim (`makeNixvimWithModule`), installed as binary `vimiranie`.
+  - `packages.lsp` — same nixvim extended with `vimiranie.settings.lsp.enable = true`, installed as binary `vimiranie-lsp`.
 - `modules/home-manager.nix` — `flake.homeManagerModules.default`; exposes `programs.vimiranie` with options (`enable`, `package`, `packageWithLsps`, `settings.*` for stylix/colorschemes/obsidian/supermaven).
 - `modules/options.nix` — custom option definitions (e.g. `vimiranie.settings.lsp.enable`).
 - `modules/config/` — plain Neovim config (opts, keymaps, autocmds, filetypes).
